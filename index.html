@@ -39,11 +39,29 @@
             </button>
         </div>
 
-        <!-- 输入区 -->
-        <div class="input-section">
-            <textarea id="user-input" placeholder="输入你的测试要求..."></textarea>
-        </div>
-				
+				<!-- 修改输入区结构 -->
+				<div class="input-section">
+				  <div class="input-wrapper">
+				    <textarea id="user-input" placeholder="输入或语音录入..."></textarea>
+				    <div class="voice-controls">
+				      <button id="voice-btn" class="voice-btn">
+							  <svg id="mic-icon" class="icon mic-icon" viewBox="0 0 24 24">
+							    <!-- 麦克风图标 -->
+							    <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5-3c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+							  </svg>
+							  <svg id="check-icon" class="icon check-icon" viewBox="0 0 24 24" style="display: none;">
+							    <!-- 完成图标（☑️） -->
+							    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+							  </svg>
+							</button>
+				      <div class="recording-indicator">
+				        <div class="pulse"></div>
+				        <span id="timer">00:00</span>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+
 				<!-- 在原有HTML基础上修改以下部分 -->
 				<div class="multimodal-toolbar hidden" id="multimodal-toolbar">
 				    <button class="add-button" id="add-media">+</button>
@@ -77,8 +95,9 @@
 
     <!-- 加载工具函数 -->
     <script src="utils/apiHelper.js"></script>
-     <script src="utils/multimodal.js"></script>
-     <script src="utils/resultFormatter.js"></script>
+    <script src="utils/multimodal.js"></script>
+		<script src="utils/voiceInput.js"></script>
+    <script src="utils/resultFormatter.js"></script>
 
     <!-- 加载核心API函数 -->
     <script src="apis/apiCore.js"></script>
