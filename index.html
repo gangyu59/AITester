@@ -1,1 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>AI Tester</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 标题区 -->
+        <h1 class="main-title">AI Tester</h1>
 
+        <!-- 控制栏 -->
+        <div class="control-bar">
+            <div class="control-group">
+                <label class="control-label">AI</label>
+                <select id="ai-model" class="model-select">
+                    <option value="gpt">GPT-4</option>
+                    <option value="deepseek">DeepSeek</option>
+                    <option value="claude">Claude 3</option>
+                    <option value="ark">ARK</option>
+                    <option value="dalle">DALL-E</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">类目</label>
+                <select id="test-type" class="test-select">
+                    <option value="logic">逻辑测试</option>
+                    <option value="creative">创意测试</option>
+                    <option value="multimodal">多模态测试</option>
+                </select>
+            </div>
+
+            <button id="run-btn" class="run-button">
+                <span class="btn-text">开始测试</span>
+                <div class="loader hidden"></div>
+            </button>
+        </div>
+
+        <!-- 输入区 -->
+        <div class="input-section">
+            <textarea id="user-input" placeholder="输入你的测试要求..."></textarea>
+        </div>
+				
+				<!-- 在原有HTML基础上修改以下部分 -->
+				<div class="multimodal-toolbar hidden" id="multimodal-toolbar">
+				    <button class="add-button" id="add-media">+</button>
+				    <div class="media-preview" id="media-preview"></div>
+				</div>
+				
+				<div class="media-menu hidden" id="media-menu">
+				    <button class="media-option" data-type="audio">🎤 语音输入</button>
+				    <button class="media-option" data-type="image">🖼️ 图片上传</button>
+				    <button class="media-option" data-type="file">📎 文件附件</button>
+				</div>
+				
+				<!-- 隐藏的文件输入 -->
+				<input type="file" id="image-upload" accept="image/*" hidden>
+				<input type="file" id="file-upload" hidden>
+
+        <!-- 输出区 -->
+        <div class="output-container">
+            <div id="output-area" class="output-content"></div>
+        </div>
+
+        <!-- 状态指示器 -->
+        <div id="status-indicator" class="status-hidden">
+            <div class="hourglass"></div>
+            <span>AI正在思考...</span>
+        </div>
+    </div>
+
+    <!-- 加载配置文件 -->
+    <script src="config.js"></script>
+
+    <!-- 加载工具函数 -->
+    <script src="utils/apiHelper.js"></script>
+     <script src="utils/multimodal.js"></script>
+     <script src="utils/resultFormatter.js"></script>
+
+    <!-- 加载核心API函数 -->
+    <script src="apis/apiCore.js"></script>
+
+    <!-- 加载模型专用函数 -->
+    <script src="apis/gpt.js"></script>
+    <script src="apis/deepseek.js"></script>
+    <script src="apis/ark.js"></script>
+		<script src="apis/dalle.js"></script>
+    <script src="apis/claude.js"></script>
+
+    <!-- 加载测试脚本 -->
+    <script src="tests/logicTest.js"></script>
+    <script src="tests/creativeTest.js"></script>
+    <script src="tests/multimodalTest.js"></script>
+
+    <!-- 加载主应用程序逻辑 -->
+    <script src="app.js"></script>
+</body>
+</html>
