@@ -203,36 +203,21 @@ h1 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* 移动端适配 */
-@media (max-width: 480px) {
-    .control-bar {
-        gap: 8px;
-    }
-    
-    #run-btn {
-        padding: 10px 20px;
-        font-size: 14px;
-        min-width: 80px;
-    }
-    
-    .model-selector select,
-    .test-type-selector select {
-        padding: 10px;
-    }
-}
-
-/* 新增/修改的CSS */
+/* 修改后的媒体相关CSS */
 /* 多模态工具栏 */
 #multimodal-toolbar {
     margin: 12px 0;
     transition: opacity 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 #multimodal-toolbar.hidden {
     display: none;
 }
 
-/* +按钮样式 */
+/* +按钮样式优化 */
 .add-button {
     width: 36px;
     height: 36px;
@@ -242,15 +227,20 @@ h1 {
     font-size: 28px;
     line-height: 1;
     cursor: pointer;
-    transition: transform 0.2s;
-    margin-right: 8px;
+    transition: all 0.2s;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .add-button:hover {
     transform: scale(1.15);
+    background: rgba(0,122,255,0.1);
+    border-radius: 50%;
 }
 
-/* 媒体菜单 */
+/* 媒体菜单优化 */
 #media-menu {
     position: absolute;
     background: #ffffff;
@@ -263,6 +253,7 @@ h1 {
     opacity: 0;
     transform: translateY(-10px);
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(20px);
 }
 
 #media-menu.show {
@@ -270,21 +261,166 @@ h1 {
     transform: translateY(0);
 }
 
-.media-option {
+/* 媒体预览区优化 */
+.media-preview {
     display: flex;
-    align-items: center;
     gap: 8px;
-    width: 100%;
-    padding: 10px 16px;
-    background: none;
-    border: none;
-    border-radius: 8px;
-    font-size: 15px;
-    color: #1d1d1f;
-    cursor: pointer;
-    transition: background 0.2s;
+    flex-wrap: wrap;
+    padding: 4px;
+    max-width: 100%;
 }
 
-.media-option:hover {
+/* 添加媒体项样式 */
+.media-item {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    overflow: hidden;
     background: #f5f5f7;
+    border: 1px solid rgba(0,0,0,0.1);
+    margin: 4px;
+}
+
+.media-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(0.33);
+    transform-origin: center center;
+}
+
+.remove-media {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 20px;
+    height: 20px;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.media-item:hover .remove-media {
+    opacity: 1;
+}
+
+/* 加载状态指示器 */
+.media-loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 24px;
+    height: 24px;
+    border: 3px solid rgba(0,122,255,0.2);
+    border-top-color: #007aff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* 移动端适配 */
+@media (max-width: 480px) {
+    .media-item {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .media-item img {
+        transform: scale(0.3);
+    }
+    
+    #media-menu {
+        min-width: 160px;
+        left: 50% !important;
+        transform: translateX(-50%) translateY(-10px);
+    }
+    
+    #media-menu.show {
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+/* 新增语音控制样式 */
+.input-wrapper {
+  position: relative;
+}
+
+.voice-controls {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* 按钮样式 */
+.voice-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none; /* 去掉点击时的蓝色边框 */
+}
+
+/* 图标样式 */
+.icon {
+  width: 24px;
+  height: 24px;
+  fill: #000; /* 图标颜色 */
+  transition: fill 0.3s ease;
+}
+
+/* 录音时的图标颜色 */
+.voice-btn.active .mic-icon {
+  fill: #007bff; /* 录音时的颜色 */
+}
+
+/* 完成图标 */
+.check-icon {
+  fill: #28a745; /* 完成时的颜色 */
+}
+
+.voice-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.recording-indicator {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  color: #ff3b30;
+}
+
+.recording-indicator.active {
+  display: flex;
+}
+
+.pulse {
+  width: 12px;
+  height: 12px;
+  background: currentColor;
+  border-radius: 50%;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.9); opacity: 0.8; }
+  100% { transform: scale(1.5); opacity: 0; }
 }
