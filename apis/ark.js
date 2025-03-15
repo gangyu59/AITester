@@ -4,6 +4,39 @@
  * @param {Object} options - 可选参数（如 max_tokens, temperature 等）
  * @returns {Promise<Object>} - ARK 的响应结果
  */
+ 
+/**
+ * 格式化ARK模型请求消息
+ * @param {Array} messages - 原始消息列表
+ * @returns {Array} - ARK兼容格式的消息
+ */
+function formatARKMessage(messages) {
+  return messages.map(msg => {
+    // 确保content是数组
+    const content = Array.isArray(msg.content) 
+      ? msg.content 
+      : [{ type: "text", text: msg.content }];
+
+    return {
+      role: msg.role,
+      content: content.map(item => {
+        // 处理图片
+        if (item.type === 'image_url') {
+          return {
+            type: "image",
+            data: item.image_url.url.replace(/^data:image\/\w+;base64,/, "")
+          };
+        }
+        // 处理文本
+        return {
+          type: "text",
+          text: item.text || item.content || "" // 防止undefined
+        };
+      })
+    };
+  });
+}
+
 var callARK = async function(messages, options = {}) {
     const headers = {
         'Authorization': `Bearer ${ARK_API_KEY}`,
