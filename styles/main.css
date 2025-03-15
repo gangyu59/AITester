@@ -1,1 +1,290 @@
+/* styles/main.css 更新 */
+/* 基础样式 */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #f5f5f7;
+    color: #1d1d1f;
+    margin: 0;
+    padding: 15px;
+    min-height: 100vh; /* 新增 */
+    display: flex; /* 新增 */
+    flex-direction: column; /* 新增 */
+}
 
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    flex: 1; /* 新增 */
+    display: flex; /* 新增 */
+    flex-direction: column; /* 新增 */
+}
+
+/* 标题样式新增 */
+h1 {
+    font-size: 2em; /* 放大一倍 */
+    text-align: center;
+    margin: 20px 0;
+    color: #1d1d1f;
+}
+
+/* 控制栏布局重构 */
+.control-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* 标签加粗 */
+.control-group label {
+    font-weight: 600; /* 使用半粗体 */
+    margin-bottom: 4px;
+}
+
+/* 模型选择器改造 */
+.model-selector {
+    flex: 1;
+    min-width: 120px;
+}
+
+.model-selector select {
+    width: 100%;
+		padding: 24px; /* 高度增加20% */
+    font-size: 24px; /* 原始值：14px */
+		font-weight: 600; 
+    border: 1px solid #d2d2d7;
+    border-radius: 10px;
+    background: white;
+    appearance: none;
+}
+
+/* 新增测试类目选择器 */
+.test-type-selector {
+    flex: 1;
+    min-width: 120px;
+}
+
+.test-type-selector select {
+    width: 100%;
+    padding: 24px; /* 高度增加20% */
+    font-size: 24px; /* 原始值：14px */
+    border: 1px solid #d2d2d7;
+    border-radius: 10px;
+    background: white;
+    appearance: none;
+}
+
+/* 下拉框尺寸调整 */
+.model-select, .test-select {
+    padding: 14px 12px; /* 高度增加20% */
+    font-size: 15px; /* 原始值：14px */
+    line-height: 1.3;
+    max-height: 56px; /* 防止移动端溢出 */
+}
+
+/* 按钮改造 */
+#run-btn {
+    flex-shrink: 0;
+    padding: 12px 25px;
+    background: #34c759;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    position: relative;
+    min-width: 100px;
+}
+
+/* 输入区调整 */
+.input-section textarea {
+    width: 93%;
+    height: 60px; /* 缩小1/3 */
+    padding: 12px;
+    border: 1px solid #d2d2d7;
+    border-radius: 10px;
+    resize: none;
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+/* 输出区调整 */
+.output-container {
+    flex: 1; /* 新增 */
+    background: white;
+    border-radius: 12px;
+		max-height: 100px
+    padding: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    min-height: 10px;
+    overflow-y: auto; /* 新增滚动条 */
+    margin-bottom: 60px; /* 给状态指示器留空间 */
+}
+
+/* 以下保持原有样式不变 */
+.test-btn:active {
+    opacity: 0.8;
+}
+
+.loader {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255,255,255,0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.hidden {
+    display: none;
+}
+
+.response-header {
+    color: #86868b;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.output-content {
+    padding: 8px 12px 15px; /* 上 8px 左右 12px 下 15px */
+    margin: 0 -5px; /* 抵消容器padding */
+    min-height: auto; /* 移除固定高度 */
+}
+
+#status-indicator {
+    position: fixed;
+    bottom: 360px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.8);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.status-visible {
+    opacity: 1 !important;
+}
+
+.hourglass {
+    width: 20px;
+    height: 20px;
+    animation: flip 1.5s ease-in-out infinite;
+}
+
+@keyframes flip {
+    0% { transform: rotate(0deg); }
+    50% { transform: rotate(180deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.image-result {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.image-result img {
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 移动端适配 */
+@media (max-width: 480px) {
+    .control-bar {
+        gap: 8px;
+    }
+    
+    #run-btn {
+        padding: 10px 20px;
+        font-size: 14px;
+        min-width: 80px;
+    }
+    
+    .model-selector select,
+    .test-type-selector select {
+        padding: 10px;
+    }
+}
+
+/* 新增/修改的CSS */
+/* 多模态工具栏 */
+#multimodal-toolbar {
+    margin: 12px 0;
+    transition: opacity 0.3s;
+}
+
+#multimodal-toolbar.hidden {
+    display: none;
+}
+
+/* +按钮样式 */
+.add-button {
+    width: 36px;
+    height: 36px;
+    background: none;
+    border: none;
+    color: #007aff;
+    font-size: 28px;
+    line-height: 1;
+    cursor: pointer;
+    transition: transform 0.2s;
+    margin-right: 8px;
+}
+
+.add-button:hover {
+    transform: scale(1.15);
+}
+
+/* 媒体菜单 */
+#media-menu {
+    position: absolute;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    padding: 8px;
+    z-index: 1000;
+    min-width: 140px;
+    border: 1px solid rgba(0,0,0,0.1);
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#media-menu.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.media-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 10px 16px;
+    background: none;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    color: #1d1d1f;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.media-option:hover {
+    background: #f5f5f7;
+}
