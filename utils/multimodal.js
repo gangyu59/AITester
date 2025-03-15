@@ -92,7 +92,7 @@ async function handleAudioInput() {
     });
 }
 
-// 添加媒体预览
+// 在multimodal.js中添加/修改以下内容
 function addMediaPreview(media) {
     mediaAttachments.push(media);
     
@@ -100,20 +100,28 @@ function addMediaPreview(media) {
     const item = document.createElement('div');
     item.className = 'media-item';
     
+    // 根据类型创建内容
     let content;
-    if (media.type === 'image') {
-        content = `<img src="${media.data}">`;
-    } else if (media.type === 'audio') {
-        content = `<audio controls src="${media.data}"></audio>`;
-    } else {
-        content = `<div class="text-preview">${media.data}</div>`;
+    switch(media.type) {
+        case 'image':
+            content = `<img src="${media.data}" alt="上传的图片">`;
+            break;
+        case 'audio':
+            content = `<audio controls src="${media.data}"></audio>`;
+            break;
+        default:
+            content = `<div class="text-preview">${media.data.substring(0, 30)}...</div>`;
     }
 
+    // 完整预览项结构
     item.innerHTML = `
-        ${content}
+        <div class="media-content">
+            ${content}
+        </div>
         <button class="remove-media">×</button>
     `;
     
+    // 添加删除功能
     item.querySelector('.remove-media').addEventListener('click', () => {
         mediaAttachments = mediaAttachments.filter(m => m !== media);
         item.remove();
