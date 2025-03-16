@@ -284,5 +284,5 @@ function toggleLoading(show) {
     runButton.disabled = show;
     statusIndicator.classList.toggle('status-visible', show);
     runButton.querySelector('.loader').classList.toggle('hidden', !show);
-    runButton.querySelector('.btn-text').textContent = show ? '处理中...' : '开始测试';
+    runButton.querySelector('.btn-text').textContent = show ? '处理中...' : '开始';
 }
