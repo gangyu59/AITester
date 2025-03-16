@@ -129,6 +129,6 @@ checkMicrophonePermission().then(hasPermission => {
     const voiceInput = new VoiceInput();
     document.getElementById('voice-btn').addEventListener('click', () => voiceInput.start());
   } else {
-    alert('请确保已授予麦克风权限，并刷新页面重试');
+    console.error('请确保已授予麦克风权限，并刷新页面重试');
   }
 });
