@@ -1,0 +1,126 @@
+/* ==================== 输入区样式 ==================== */
+.input-section textarea {
+    width: 93%;
+    height: 60px;
+    padding: 12px;
+    border: 1px solid #d2d2d7;
+    border-radius: 10px;
+    resize: none;
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+.input-wrapper {
+    position: relative;
+}
+
+.voice-controls {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.voice-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+    fill: #000;
+    transition: fill 0.3s ease;
+}
+
+.voice-btn.active .mic-icon {
+    fill: #007bff;
+}
+
+.check-icon {
+    fill: #28a745;
+}
+
+.voice-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.recording-indicator {
+    display: none;
+    align-items: center;
+    gap: 6px;
+    color: #ff3b30;
+}
+
+.recording-indicator.active {
+    display: flex;
+}
+
+.pulse {
+    width: 12px;
+    height: 12px;
+    background: currentColor;
+    border-radius: 50%;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(0.9); opacity: 0.8; }
+    100% { transform: scale(1.5); opacity: 0; }
+}
+
+/* ==================== 输出区样式 ==================== */
+.output-container {
+    flex: 1;
+    background: white;
+    border-radius: 12px;
+    max-height: 450px;
+    padding: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    min-height: 100px;
+    overflow-y: auto;
+    margin-bottom: 60px;
+}
+
+#output-area {
+    width: 100%;
+    font-family: monospace;
+    font-size: 14px;
+    color: #333;
+    white-space: pre-wrap;
+}
+
+.copy-btn {
+    position: fixed;
+    top: 260px;
+    right: 35px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    z-index: 1000;
+}
+
+.copy-icon {
+    width: 18px;
+    height: 18px;
+    fill: #666;
+    transition: fill 0.3s ease;
+}
+
+.copy-btn:hover .copy-icon {
+    fill: #007bff;
+}

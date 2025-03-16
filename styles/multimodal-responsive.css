@@ -1,0 +1,142 @@
+/* ==================== 多模态工具栏样式 ==================== */
+#multimodal-toolbar {
+    margin: 12px 0;
+    transition: opacity 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#multimodal-toolbar.hidden {
+    display: none;
+}
+
+.add-button {
+    width: 36px;
+    height: 36px;
+    background: none;
+    border: none;
+    color: #007aff;
+    font-size: 28px;
+    line-height: 1;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-button:hover {
+    transform: scale(1.15);
+    background: rgba(0, 122, 255, 0.1);
+    border-radius: 50%;
+}
+
+#media-menu {
+    position: absolute;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    padding: 8px;
+    z-index: 1000;
+    min-width: 140px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(20px);
+}
+
+#media-menu.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.media-preview {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    padding: 4px;
+    max-width: 100%;
+}
+
+.media-item {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #f5f5f7;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    margin: 4px;
+}
+
+.media-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(0.33);
+    transform-origin: center center;
+}
+
+.remove-media {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 20px;
+    height: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.media-item:hover .remove-media {
+    opacity: 1;
+}
+
+.media-loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 124px;
+    height: 124px;
+    border: 3px solid rgba(0, 122, 255, 0.2);
+    border-top-color: #007aff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ==================== 移动端适配 ==================== */
+@media (max-width: 480px) {
+    .media-item {
+        width: 60px;
+        height: 60px;
+    }
+
+    .media-item img {
+        transform: scale(0.3);
+    }
+
+    #media-menu {
+        min-width: 160px;
+        left: 50% !important;
+        transform: translateX(-50%) translateY(-10px);
+    }
+
+    #media-menu.show {
+        transform: translateX(-50%) translateY(0);
+    }
+}

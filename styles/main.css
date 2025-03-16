@@ -1,33 +1,31 @@
-/* styles/main.css 更新 */
-/* 基础样式 */
+/* ==================== 基础样式 ==================== */
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     background: #f5f5f7;
     color: #1d1d1f;
     margin: 0;
     padding: 15px;
-    min-height: 100vh; /* 新增 */
-    display: flex; /* 新增 */
-    flex-direction: column; /* 新增 */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .container {
     max-width: 600px;
     margin: 0 auto;
-    flex: 1; /* 新增 */
-    display: flex; /* 新增 */
-    flex-direction: column; /* 新增 */
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
-/* 标题样式新增 */
 h1 {
-    font-size: 2em; /* 放大一倍 */
+    font-size: 2em;
     text-align: center;
     margin: 20px 0;
     color: #1d1d1f;
 }
 
-/* 控制栏布局重构 */
+/* ==================== 控制栏样式 ==================== */
 .control-bar {
     display: flex;
     gap: 10px;
@@ -36,57 +34,37 @@ h1 {
     flex-wrap: wrap;
 }
 
-/* 标签加粗 */
 .control-group label {
-    font-weight: 600; /* 使用半粗体 */
+    font-weight: 600;
     margin-bottom: 4px;
 }
 
-/* 模型选择器改造 */
-.model-selector {
+.model-selector, .test-type-selector {
     flex: 1;
     min-width: 120px;
 }
 
-.model-selector select {
+.model-selector select, .test-type-selector select {
     width: 100%;
-		padding: 24px; /* 高度增加20% */
-    font-size: 24px; /* 原始值：14px */
-		font-weight: 600; 
+    padding: 24px;
+    font-size: 24px;
+    font-weight: 600;
     border: 1px solid #d2d2d7;
     border-radius: 10px;
     background: white;
     appearance: none;
 }
 
-/* 新增测试类目选择器 */
-.test-type-selector {
-    flex: 1;
-    min-width: 120px;
-}
-
-.test-type-selector select {
-    width: 100%;
-    padding: 24px; /* 高度增加20% */
-    font-size: 24px; /* 原始值：14px */
-    border: 1px solid #d2d2d7;
-    border-radius: 10px;
-    background: white;
-    appearance: none;
-}
-
-/* 下拉框尺寸调整 */
 .model-select, .test-select {
-    padding: 14px 12px; /* 高度增加20% */
-    font-size: 15px; /* 原始值：14px */
+    padding: 14px 12px;
+    font-size: 15px;
     line-height: 1.3;
-    max-height: 56px; /* 防止移动端溢出 */
+    max-height: 56px;
 }
 
-/* 按钮改造 */
 #run-btn {
     flex-shrink: 0;
-    padding: 12px 25px;
+    padding: 5px 5px;
     background: #34c759;
     color: white;
     border: none;
@@ -94,13 +72,13 @@ h1 {
     font-size: 16px;
     cursor: pointer;
     position: relative;
-    min-width: 100px;
+    min-width: 80px;
 }
 
-/* 输入区调整 */
+/* ==================== 输入区样式 ==================== */
 .input-section textarea {
     width: 93%;
-    height: 60px; /* 缩小1/3 */
+    height: 60px;
     padding: 12px;
     border: 1px solid #d2d2d7;
     border-radius: 10px;
@@ -109,57 +87,122 @@ h1 {
     font-size: 16px;
 }
 
-/* 输出区调整 */
+.input-wrapper {
+    position: relative;
+}
+
+.voice-controls {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.voice-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+    fill: #000;
+    transition: fill 0.3s ease;
+}
+
+.voice-btn.active .mic-icon {
+    fill: #007bff;
+}
+
+.check-icon {
+    fill: #28a745;
+}
+
+.voice-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.recording-indicator {
+    display: none;
+    align-items: center;
+    gap: 6px;
+    color: #ff3b30;
+}
+
+.recording-indicator.active {
+    display: flex;
+}
+
+.pulse {
+    width: 12px;
+    height: 12px;
+    background: currentColor;
+    border-radius: 50%;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(0.9); opacity: 0.8; }
+    100% { transform: scale(1.5); opacity: 0; }
+}
+
+/* ==================== 输出区样式 ==================== */
 .output-container {
-    flex: 1; /* 新增 */
+    flex: 1;
     background: white;
     border-radius: 12px;
-		max-height: 100px
-    padding: 15px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    min-height: 10px;
-    overflow-y: auto; /* 新增滚动条 */
-    margin-bottom: 60px; /* 给状态指示器留空间 */
+    max-height: 450px;
+    padding: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    min-height: 100px;
+    overflow-y: auto;
+    margin-bottom: 60px;
 }
 
-/* 以下保持原有样式不变 */
-.test-btn:active {
-    opacity: 0.8;
-}
-
-.loader {
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 20px;
-    height: 20px;
-    border: 3px solid rgba(255,255,255,0.3);
-    border-top-color: white;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-
-.hidden {
-    display: none;
-}
-
-.response-header {
-    color: #86868b;
+#output-area {
+    width: 100%;
+    font-family: monospace;
     font-size: 14px;
-    margin-bottom: 10px;
+    color: #333;
+    white-space: pre-wrap;
 }
 
-.output-content {
-    padding: 8px 12px 15px; /* 上 8px 左右 12px 下 15px */
-    margin: 0 -5px; /* 抵消容器padding */
-    min-height: auto; /* 移除固定高度 */
+.copy-btn {
+    position: fixed;
+    top: 260px;
+    right: 35px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    z-index: 1000;
 }
 
+.copy-icon {
+    width: 18px;
+    height: 18px;
+    fill: #666;
+    transition: fill 0.3s ease;
+}
+
+.copy-btn:hover .copy-icon {
+    fill: #007bff;
+}
+
+/* ==================== 状态指示器样式 ==================== */
 #status-indicator {
     position: fixed;
     bottom: 360px;
@@ -192,19 +235,7 @@ h1 {
     100% { transform: rotate(360deg); }
 }
 
-.image-result {
-    margin-top: 20px;
-    text-align: center;
-}
-
-.image-result img {
-    max-width: 100%;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* 修改后的媒体相关CSS */
-/* 多模态工具栏 */
+/* ==================== 多模态工具栏样式 ==================== */
 #multimodal-toolbar {
     margin: 12px 0;
     transition: opacity 0.3s;
@@ -217,7 +248,6 @@ h1 {
     display: none;
 }
 
-/* +按钮样式优化 */
 .add-button {
     width: 36px;
     height: 36px;
@@ -240,7 +270,6 @@ h1 {
     border-radius: 50%;
 }
 
-/* 媒体菜单优化 */
 #media-menu {
     position: absolute;
     background: #ffffff;
@@ -261,7 +290,6 @@ h1 {
     transform: translateY(0);
 }
 
-/* 媒体预览区优化 */
 .media-preview {
     display: flex;
     gap: 8px;
@@ -270,7 +298,6 @@ h1 {
     max-width: 100%;
 }
 
-/* 添加媒体项样式 */
 .media-item {
     position: relative;
     width: 80px;
@@ -312,14 +339,13 @@ h1 {
     opacity: 1;
 }
 
-/* 加载状态指示器 */
 .media-loading {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 24px;
-    height: 24px;
+    width: 124px;
+    height: 124px;
     border: 3px solid rgba(0,122,255,0.2);
     border-top-color: #007aff;
     border-radius: 50%;
@@ -330,97 +356,24 @@ h1 {
     to { transform: rotate(360deg); }
 }
 
-/* 移动端适配 */
+/* ==================== 移动端适配 ==================== */
 @media (max-width: 480px) {
     .media-item {
         width: 60px;
         height: 60px;
     }
-    
+
     .media-item img {
         transform: scale(0.3);
     }
-    
+
     #media-menu {
         min-width: 160px;
         left: 50% !important;
         transform: translateX(-50%) translateY(-10px);
     }
-    
+
     #media-menu.show {
         transform: translateX(-50%) translateY(0);
     }
-}
-
-/* 新增语音控制样式 */
-.input-wrapper {
-  position: relative;
-}
-
-.voice-controls {
-  position: absolute;
-  right: 12px;
-  bottom: 12px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-/* 按钮样式 */
-.voice-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  outline: none; /* 去掉点击时的蓝色边框 */
-}
-
-/* 图标样式 */
-.icon {
-  width: 24px;
-  height: 24px;
-  fill: #000; /* 图标颜色 */
-  transition: fill 0.3s ease;
-}
-
-/* 录音时的图标颜色 */
-.voice-btn.active .mic-icon {
-  fill: #007bff; /* 录音时的颜色 */
-}
-
-/* 完成图标 */
-.check-icon {
-  fill: #28a745; /* 完成时的颜色 */
-}
-
-.voice-btn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.recording-indicator {
-  display: none;
-  align-items: center;
-  gap: 6px;
-  color: #ff3b30;
-}
-
-.recording-indicator.active {
-  display: flex;
-}
-
-.pulse {
-  width: 12px;
-  height: 12px;
-  background: currentColor;
-  border-radius: 50%;
-  animation: pulse 1s infinite;
-}
-
-@keyframes pulse {
-  0% { transform: scale(0.9); opacity: 0.8; }
-  100% { transform: scale(1.5); opacity: 0; }
 }
