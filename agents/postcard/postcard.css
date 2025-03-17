@@ -112,17 +112,20 @@
 }
 
 .loading-indicator {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    flex-direction: column;
+    display: none; /* 默认隐藏 */
     align-items: center;
-    gap: 10px;
-    background: rgba(255, 255, 255, 0.9);
-    padding: 20px;
-    border-radius: 12px;
+    justify-content: center;
+    position: fixed;
+    bottom: 360px;
+    left: 30%;
+    color: black;
+    padding: 30px 20px;
+    border-radius: 5px;
+    z-index: 1000;
+}
+
+#loading-indicator.status-visible {
+    display: flex; /* 显示状态指示器 */
 }
 
 .hourglass {

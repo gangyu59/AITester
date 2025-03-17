@@ -39,9 +39,7 @@ if (!window.PostcardAgent) {
             const textPosition = document.getElementById('text-position').value;
             const aiModel = document.getElementById('ai-model').value;
 
-					  // 显示加载动画
-				    const loadingIndicator = document.getElementById('loading-indicator');
-				    loadingIndicator.classList.remove('hidden');
+					  toggleHourglass(true);
 						
             try {
                 // 构建AI提示词
@@ -63,7 +61,7 @@ if (!window.PostcardAgent) {
                 alert('生成失败，请稍后重试');
             } finally {
                 // 隐藏加载动画
-      				loadingIndicator.classList.add('hidden');
+      				toggleHourglass(false);
             }
         }
 
@@ -113,6 +111,13 @@ if (!window.PostcardAgent) {
 
     // 将类挂载到全局对象
     window.PostcardAgent = PostcardAgent;
+}
+
+// 切换加载状态
+function toggleHourglass(show) {
+    const loadingIndicator = document.getElementById('loading-indicator');
+
+    loadingIndicator.classList.toggle('status-visible', show);
 }
 
 // 初始化智能体
