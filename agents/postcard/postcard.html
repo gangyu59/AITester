@@ -1,1 +1,94 @@
+<div class="postcard-agent">
+    <h2>💌 明信片生成器</h2>
+    <div class="divider"></div>
 
+    <!-- 输入区 -->
+    <div class="input-section">
+        <!-- 特殊原因 -->
+        <div class="form-group">
+            <label>🎉 特殊原因</label>
+            <select id="occasion">
+                <option value="spring">春天</option>
+                <option value="festival">节日</option>
+                <option value="birthday">生日</option>
+                <option value="graduation">毕业</option>
+                <option value="other">其他</option>
+            </select>
+            <input id="custom-occasion" class="hidden" placeholder="请输入特殊原因">
+        </div>
+
+        <!-- 接收人类型 -->
+        <div class="form-group">
+            <label>👫 接收人类型</label>
+            <select id="recipient">
+                <option value="family">亲人</option>
+                <option value="friend">朋友</option>
+                <option value="teacher">老师</option>
+                <option value="lover">恋人</option>
+            </select>
+        </div>
+
+        <!-- 祝福语类型 -->
+        <div class="form-group">
+            <label>📜 祝福语类型</label>
+            <select id="text-type">
+                <option value="five-poem">五言诗</option>
+                <option value="seven-poem">七律</option>
+                <option value="prose">散文</option>
+                <option value="simple">简语</option>
+            </select>
+        </div>
+
+        <!-- 祝福语偏好 -->
+        <div class="form-group">
+            <label>💖 祝福语偏好</label>
+            <div class="preference-tags">
+                <label><input type="checkbox" name="preference" value="romantic">浪漫</label>
+                <label><input type="checkbox" name="preference" value="nostalgic">思念</label>
+                <label><input type="checkbox" name="preference" value="warm">温馨</label>
+                <label><input type="checkbox" name="preference" value="funny">幽默</label>
+            </div>
+        </div>
+
+        <!-- 图片要求 -->
+        <div class="form-group">
+            <label>🖼️ 图片要求</label>
+            <select id="image-layout">
+                <option value="horizontal">横版</option>
+                <option value="vertical">竖版</option>
+                <option value="circle">圆形</option>
+            </select>
+            <select id="text-position">
+                <option value="bottom-right">右下角</option>
+                <option value="top-left">左上角</option>
+                <option value="center">居中</option>
+            </select>
+        </div>
+				
+				<div class="form-group">
+				    <label>🤖 AI 模型</label>
+				    <select id="ai-model">
+				        <option value="gpt">GPT-4</option>
+				        <option value="deepseek">DeepSeek</option>
+				        <option value="claude">Claude</option>
+				        <option value="ark">ARK</option>
+				    </select>
+				</div>
+
+        <!-- 生成按钮 -->
+        <button id="generate-btn" class="generate-btn">🪄 生成明信片</button>
+    </div>
+
+    <!-- 输出区 -->
+		<div class="output-section">
+		    <div class="preview-area">
+		        <img id="postcard-image" class="postcard-template" src="assets/postcard-template.jpg" alt="明信片模板">
+		        <div id="text-overlay" class="text-overlay">祝福语将显示在这里</div>
+		        <div id="loading-indicator" class="loading-indicator hidden">
+		            <div class="hourglass"></div>
+		            <span>AI 正在思考...</span>
+		        </div>
+		    </div>
+		    <button id="download-btn" class="download-btn hidden">⬇️ 下载明信片</button>
+		</div>
+</div>
