@@ -77,33 +77,32 @@ h1 {
 
 /* ==================== 状态指示器样式 ==================== */
 #status-indicator {
+    display: none; /* 默认隐藏 */
+    align-items: center;
+    justify-content: center;
     position: fixed;
     bottom: 360px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0,0,0,0.8);
-    color: white;
-    padding: 12px 20px;
-    border-radius: 25px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    opacity: 0;
-    transition: opacity 0.3s;
+    left: 30%;
+    color: black;
+    padding: 30px 20px;
+    border-radius: 5px;
+    z-index: 1000;
 }
 
-.status-visible {
-    opacity: 1 !important;
+#status-indicator.status-visible {
+    display: flex; /* 显示状态指示器 */
 }
 
 .hourglass {
-    width: 20px;
-    height: 20px;
-    animation: flip 1.5s ease-in-out infinite;
+    width: 30px;
+    height: 30px;
+    border: 4px solid #007bff;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
 }
 
-@keyframes flip {
-    0% { transform: rotate(0deg); }
-    50% { transform: rotate(180deg); }
-    100% { transform: rotate(360deg); }
+@keyframes spin {
+    to { transform: rotate(360deg); }
 }
+
