@@ -1,0 +1,117 @@
+<!-- home.html -->
+<!-- 标题区 -->
+<h1 class="main-title">AI Tester</h1>
+
+<!-- 控制栏 -->
+<div class="control-bar">
+    <div class="control-group">
+        <label class="control-label">AI</label>
+        <select id="ai-model" class="model-select">
+            <option value="gpt">GPT-4</option>
+            <option value="deepseek">DeepSeek</option>
+            <option value="claude">Claude</option>
+            <option value="ark">ARK</option>
+            <option value="dalle">DALL-E</option>
+        </select>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label">类目</label>
+        <select id="test-type" class="test-select">
+            <option value="logic">逻辑测试</option>
+            <option value="creative">创意测试</option>
+            <option value="multimodal">多模态测试</option>
+        </select>
+    </div>
+
+    <button id="run-btn" class="run-button">
+        <span class="btn-text">开始</span>
+        <div class="loader hidden"></div>
+    </button>
+</div>
+
+<!-- 输入区 -->
+<div class="input-section">
+    <div class="input-wrapper">
+        <textarea id="user-input" placeholder="输入文字或语音录入..."></textarea>
+        <div class="voice-controls">
+            <button id="voice-btn" class="voice-btn">
+                <svg class="icon mic-icon">
+                    <use href="assets/icons.svg#mic-icon"></use>
+                </svg>
+                <svg class="icon check-icon" style="display: none;">
+                    <use href="assets/icons.svg#check-icon"></use>
+                </svg>
+            </button>
+            <div class="recording-indicator">
+                <div class="pulse"></div>
+                <span id="timer">00:00</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 多媒体工具栏 -->
+<div class="multimodal-toolbar hidden" id="multimodal-toolbar">
+    <button class="add-button" id="add-media">+</button>
+    <div class="media-preview" id="media-preview"></div>
+</div>
+
+<div class="media-menu hidden" id="media-menu">
+    <button class="media-option" data-type="audio">🎤 语音输入</button>
+    <button class="media-option" data-type="image">🖼️ 图片上传</button>
+    <button class="media-option" data-type="file">📎 文件附件</button>
+</div>
+
+<!-- 隐藏的文件输入 -->
+<input type="file" id="image-upload" accept="image/*" hidden>
+<input type="file" id="file-upload" hidden>
+
+<!-- 输出区 -->
+<div class="output-container">
+    <div id="output-area" class="output-content"></div>
+    <button id="copy-btn" class="copy-btn">
+        <svg class="icon copy-icon">
+            <use href="assets/icons.svg#copy-icon"></use>
+        </svg>
+    </button>
+</div>
+
+<!-- 状态指示器 -->
+<div id="status-indicator" class="status-hidden">
+    <div class="hourglass"></div>
+    <span>AI正在思考...</span>
+</div>
+
+<script src="utils/uiControls.js"></script>
+
+<script>
+// 定义需要监听的元素及其事件
+		const elementsToObserve = [
+		    { selector: '#test-type', event: 'change', handler: handleTestTypeChange },
+		    { selector: '#copy-btn', event: 'click', handler: handleCopyBtnClick },
+		    { selector: '#ai-model', event: 'change', handler: handleAiModelChange }
+		];
+		
+		// 启动监听
+		if (window.LoadComponents && window.LoadComponents.setupDynamicPage) {
+		    window.LoadComponents.setupDynamicPage(elementsToObserve);
+		} else {
+		    console.error('LoadComponents 未定义');
+		}
+		
+		// 事件处理函数
+		function handleTestTypeChange(event) {
+		    console.log('Test Type changed:', event.target.value);
+		}
+		
+		function handleCopyBtnClick(event) {
+		    console.log('Copy button clicked');
+		}
+		
+		function handleAiModelChange(event) {
+		    console.log('AI Model changed:', event.target.value);
+		}
+</script>
+
+
