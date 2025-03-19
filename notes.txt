@@ -1,0 +1,32 @@
+AITester/
+    /styles/
+        ├── base.css
+        ├── input-output.css
+        └── multimodal-responsive.css      # 格式文件
+    /apis/
+        apiCore.js     # 通用API调用函数
+        gpt.js         # GPT-specific 函数
+        deepseek.js    # DeepSeek-specific 函数
+        claude.js      # Claude-specific 函数
+        ark.js 				 # ARK-specific 函数
+				dalle.js       # DALL-E-specific 函数
+    /agents/
+		    /postcard/
+				     postcardAgent.js   # 明信片智能体
+		/tests/
+        logicTest.js       # 逻辑测试
+        creativeTest.js    # 创意测试
+        multimodalTest.js  # 多模态测试
+        // 其他测试脚本
+		/assets/
+        icons.svg
+    /utils/
+        apiHelper.js       # 辅助函数（如错误处理、请求格式化）
+				voiceInput.js			# 用语音转成文本输入
+				multimodal.js 		# 用文本、图片、语音输入
+        resultFormatter.js # 结果格式化函数
+				router.js         # 负责在标签页之间的转换
+    config.js         # 配置文件（API密钥、默认参数等）
+    app.js                # 主应用程序逻辑
+    index.html            # 入口文件
+		home.html             # 主页面的定义

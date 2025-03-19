@@ -126,50 +126,10 @@
     <script src="tests/logicTest.js"></script>
     <script src="tests/creativeTest.js"></script>
     <script src="tests/multimodalTest.js"></script>
+		<script src="agents/postcard/postcard.js"></script>
 
     <!-- 新增路由逻辑 -->
-    <script>
-    // 标签切换功能
-    document.querySelectorAll('.nav-btn').forEach(btn => {
-        btn.addEventListener('click', async function() {
-            // 移除所有激活状态
-            document.querySelectorAll('.nav-btn, .tab-content').forEach(el => {
-                el.classList.remove('active');
-            });
-            
-            // 设置当前激活状态
-            this.classList.add('active');
-            const targetTab = document.getElementById(`${this.dataset.tab}-tab`);
-            targetTab.classList.add('active');
-
-            // 动态加载智能体（仅首次加载）
-            if(this.dataset.tab !== 'home' && !targetTab.dataset.loaded) {
-                try {
-                    // 加载HTML内容
-                    const response = await fetch(targetTab.dataset.agent);
-                    targetTab.innerHTML = await response.text();
-                    
-                    // 加载CSS
-                    const cssPath = targetTab.dataset.agent.replace('.html', '.css');
-                    const link = document.createElement('link');
-                    link.rel = 'stylesheet';
-                    link.href = cssPath;
-                    document.head.appendChild(link);
-
-                    // 加载JS
-                    const jsPath = targetTab.dataset.agent.replace('.html', '.js');
-                    const script = document.createElement('script');
-                    script.src = jsPath;
-                    document.body.appendChild(script);
-
-                    targetTab.dataset.loaded = true;
-                } catch (error) {
-                    console.error('加载智能体失败:', error);
-                }
-            }
-        });
-    });
-    </script>
+		<script src="utils/router.js"></script>
 
     <!-- 原有应用程序逻辑 -->
     <script src="app.js"></script>
