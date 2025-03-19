@@ -8,23 +8,22 @@
         <div class="form-group">
             <label>🎉 场景</label>
             <select id="occasion">
-                <option value="season">季节</option>
-                <option value="festival">节日</option>
-                <option value="birthday">生日</option>
-                <option value="graduation">毕业</option>
-                <option value="other">其他</option>
+                <option value="季节">季节</option>
+                <option value="节日">节日</option>
+                <option value="生日">生日</option>
+                <option value="毕业">毕业</option>
+                <option value="其它">其他</option>
             </select>
-            <input id="custom-occasion" class="hidden" placeholder="请输入特殊原因">
         </div>
 
         <!-- 接收人类型 -->
         <div class="form-group">
             <label>👫 接收人</label>
             <select id="recipient">
-                <option value="family">亲人</option>
-                <option value="friend">朋友</option>
-                <option value="teacher">老师</option>
-                <option value="lover">恋人</option>
+                <option value="亲人">亲人</option>
+                <option value="朋友">朋友</option>
+                <option value="老师">老师</option>
+                <option value="恋人">恋人</option>
             </select>
         </div>
 
@@ -32,63 +31,64 @@
         <div class="form-group">
             <label>🖼️ 图片要求</label>
             <select id="image-layout">
-                <option value="horizontal">横版</option>
-                <option value="vertical">竖版</option>
-                <option value="circle">圆形</option>
+                <option value="横版">横版</option>
+                <option value="竖版">竖版</option>
+                <option value="圆形">圆形</option>
             </select>
             <select id="text-position">
-                <option value="bottom-right">右下角</option>
-                <option value="top-left">左上角</option>
-                <option value="center">居中</option>
+                <option value="右下角">右下角</option>
+                <option value="左上角">左上角</option>
+                <option value="居中">居中</option>
             </select>
         </div>
-				
+
         <!-- 祝福语偏好 -->
         <div class="form-group">
             <label>💖 偏好</label>
             <div class="preference-tags">
-                <label><input type="checkbox" name="preference" value="romantic">浪漫</label>
-                <label><input type="checkbox" name="preference" value="nostalgic">思念</label>
-                <label><input type="checkbox" name="preference" value="warm">温馨</label>
-                <label><input type="checkbox" name="preference" value="funny">幽默</label>
+                <label><input type="checkbox" name="preference" value="浪漫">浪漫</label>
+                <label><input type="checkbox" name="preference" value="思念">思念</label>
+                <label><input type="checkbox" name="preference" value="温馨">温馨</label>
+                <label><input type="checkbox" name="preference" value="幽默">幽默</label>
             </div>
         </div>
-				
-				<!-- 祝福语类型 -->
+
+        <!-- 祝福语类型 -->
         <div class="form-group">
             <label>📜 祝福语</label>
             <select id="text-type">
-                <option value="five-poem">诗词</option>
-                <option value="seven-poem">散文</option>
-                <option value="prose">问候</option>
-                <option value="simple">简语</option>
+                <option value="诗词">诗词</option>
+                <option value="散文">散文</option>
+                <option value="问候">问候</option>
+                <option value="简语">简语</option>
             </select>
         </div>
-				
-				<div class="form-group">
-				    <label>🤖 AI 模型</label>
-				    <select id="ai-model">
-				        <option value="gpt">GPT-4</option>
-				        <option value="deepseek">DeepSeek</option>
-				        <option value="claude">Claude</option>
-				        <option value="ark">ARK</option>
-				    </select>
-				</div>
+
+        <div class="form-group">
+            <label>🤖 AI 模型</label>
+            <select id="ai-model">
+                <option value="gpt">GPT-4</option>
+                <option value="deepseek">DeepSeek</option>
+                <option value="claude">Claude</option>
+                <option value="ark">ARK</option>
+            </select>
+        </div>
 
         <!-- 生成按钮 -->
-        <button id="generate-btn" class="generate-btn">🪄 生成明信片</button>
+        <button id="generate-btn" class="generate-btn">生成祝福语</button>
+				<button id="generate-image-btn" class="generate-image-btn">生成图片</button>
+		    <button id="download-btn" class="download-btn">下载</button>
     </div>
 
     <!-- 输出区 -->
 		<div class="output-section">
 		    <div class="preview-area">
-		        <img id="postcard-image" class="postcard-template" src="assets/postcard-template.jpg" alt="明信片模板">
-		        <div id="text-overlay" class="text-overlay">祝福语将显示在这里</div>
+		        <img id="postcard-image" class="postcard-template" src="assets/postcard-template.jpg" alt="  ">
+		        <div id="text-overlay" class="text-overlay" contenteditable="true">祝福语显示在这里</div>
 		        <div id="loading-indicator" class="loading-hidden">
 		            <div class="hourglass"></div>
 		            <span>AI 正在思考...</span>
 		        </div>
 		    </div>
-		    <button id="download-btn" class="download-btn hidden">⬇️ 下载明信片</button>
 		</div>
 </div>

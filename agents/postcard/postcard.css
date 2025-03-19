@@ -42,22 +42,6 @@
     gap: 4px;
 }
 
-.generate-btn {
-    grid-column: span 2;
-    padding: 12px;
-    background: #007bff;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background 0.3s;
-}
-
-.generate-btn:hover {
-    background: #0056b3;
-}
-
 .output-section {
     display: flex;
     flex-direction: column;
@@ -83,27 +67,34 @@
 
 .text-overlay {
     position: absolute;
-    font-family: 'Ma Shan Zheng', cursive;
-    font-size: 24px;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* 居中 */
+    max-width: 80%;
+    font-family: -apple-system, BlinkMacSystemFont, "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", "SimSun", "Arial", sans-serif;
+    font-size: 16px;
     color: #3e2723;
     background: rgba(255, 255, 255, 0.8);
     padding: 10px;
     border-radius: 8px;
     cursor: text;
+    display: block; /* 确保它是可见的 */
+    white-space: pre-line; /* 让多行文本正常显示 */
 }
 
-.download-btn {
-    padding: 12px 24px;
+.generate-btn,.download-btn, .generate-image-btn{
+    padding: 2px 5px;
+		width: 100px;
     background: #28a745;
     color: white;
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 14px;
     transition: background 0.3s;
 }
 
-.download-btn:hover {
+.generate-btn, .download-btn, .generate-image-btn:hover {
     background: #218838;
 }
 

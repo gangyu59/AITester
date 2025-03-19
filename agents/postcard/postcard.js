@@ -1,107 +1,158 @@
 if (!window.PostcardAgent) {
     class PostcardAgent {
         constructor() {
-            this.initUI();
-            this.bindEvents();
+            console.log('PostcardAgent 初始化');
+ 					document.addEventListener("DOMContentLoaded", () => {
+                this.initUI();
+                this.bindEvents();
+            });
         }
 
         initUI() {
-            // 动态显示自定义输入框
-            document.getElementById('occasion').addEventListener('change', (e) => {
-                const customInput = document.getElementById('custom-occasion');
-                customInput.classList.toggle('hidden', e.target.value !== 'other');
-            });
+            const occasionElem = document.getElementById('occasion');
+            if (occasionElem) {
+                occasionElem.addEventListener('change', (e) => {
+                    const customInput = document.getElementById('custom-occasion');
+                    customInput.classList.toggle('hidden', e.target.value !== 'other');
+                });
+            } else {
+                console.warn('occasion 元素未找到，可能是页面未完全加载');
+            }
         }
 
         bindEvents() {
-            // 绑定生成按钮事件
-            document.getElementById('generate-btn').addEventListener('click', () => {
-                this.generatePostcard();
-            });
+            console.log('执行 bindEvents()');
 
-            // 绑定下载按钮事件
-            document.getElementById('download-btn').addEventListener('click', () => {
-                this.downloadPostcard();
-            });
+            // 绑定 "生成明信片" 按钮
+            const generateBtn = document.getElementById('generate-btn');
+            if (generateBtn) {
+                generateBtn.addEventListener('click', () => {
+                    console.log('generate-btn 被点击');
+                    this.generatePostcard();
+                });
+            } else {
+                console.warn('generate-btn 未找到，可能是页面未完全加载');
+            }
+
+            // 绑定 "生成图片" 按钮
+            const generateImageBtn = document.getElementById('generate-image-btn');
+            if (generateImageBtn) {
+                generateImageBtn.addEventListener('click', () => {
+                    console.log('generate-image-btn 被点击');
+                    generateImage();
+                });
+            } else {
+                console.warn('generate-image-btn 未找到，可能是页面未完全加载');
+            }
+
+            // 绑定 "下载图片" 按钮
+            const downloadBtn = document.getElementById('download-btn');
+            if (downloadBtn) {
+                downloadBtn.addEventListener('click', () => {
+                    this.downloadPostcard();
+                });
+            } else {
+                console.warn('download-btn 未找到，可能是页面未完全加载');
+            }
         }
 
         async generatePostcard() {
-						
+            console.log('开始生成明信片');
+
+            // 确保所有元素都已加载
+            const occasionElem = document.getElementById('occasion');
+            if (!occasionElem) {
+                console.error('页面尚未加载完成，无法生成明信片');
+                return;
+            }
+
             // 获取用户输入
-            const occasion = document.getElementById('occasion').value === 'other'
+            const occasion = occasionElem.value === 'other'
                 ? document.getElementById('custom-occasion').value
-                : document.getElementById('occasion').value;
+                : occasionElem.value;
             const recipient = document.getElementById('recipient').value;
             const textType = document.getElementById('text-type').value;
             const preferences = Array.from(document.querySelectorAll('input[name="preference"]:checked'))
                 .map(input => input.value);
-            const imageLayout = document.getElementById('image-layout').value;
-            const textPosition = document.getElementById('text-position').value;
             const aiModel = document.getElementById('ai-model').value;
 
-					  toggleHourglass(true);
-						
+            console.log('用户输入:', { occasion, recipient, textType, preferences, aiModel });
+
+            toggleHourglass(true);
+
             try {
                 // 构建AI提示词
-                const textPrompt = `生成一段${textType}风格的祝福语，主题是${occasion}，接收人是${recipient}，风格偏好是${preferences.join(',')}`;
-                const imagePrompt = `明信片背景，${imageLayout}布局，${textPosition}文字位置`;
+                const textPrompt = `生成一段简短的不超过四句${textType}风格的祝福语，场景是${occasion}，接收人是${recipient}，风格偏好是${preferences.join(',')}`;
+
+                console.log('文本提示词:', textPrompt);
 
                 // 调用AI生成祝福语
-                const generatedText = await this.callAI(aiModel, textPrompt);
+                const generatedText = await this.callAICard(aiModel, textPrompt);
+                console.log('生成的祝福语:', generatedText);
                 document.getElementById('text-overlay').innerText = generatedText;
-
-                // 调用DALL-E生成图片
-                const imageUrl = await this.callAI('dalle', imagePrompt);
-                document.getElementById('postcard-image').src = imageUrl;
-
-                // 显示下载按钮
-                document.getElementById('download-btn').classList.remove('hidden');
             } catch (error) {
                 console.error('生成失败:', error);
                 alert('生成失败，请稍后重试');
             } finally {
-                // 隐藏加载动画
-      				toggleHourglass(false);
+                toggleHourglass(false);
             }
         }
 
-        async callAI(model, prompt) {
-            // 根据模型调用对应的API
-            switch (model) {
-                case 'gpt':
-                    return await window.AI_Tester.generateText(prompt);
-                case 'deepseek':
-                    return await window.AI_Tester.generateText(prompt);
-                case 'claude':
-                    return await window.AI_Tester.generateText(prompt);
-                case 'ark':
-                    return await window.AI_Tester.generateText(prompt);
-                case 'dalle':
-                    return await window.AI_Tester.generateImage({ prompt, size: '1024x1024' });
-                default:
-                    throw new Error('未知的AI模型');
+        async callAICard(model, prompt) {
+            const messages = [{ role: 'user', content: prompt }];
+
+            try {
+                let response;
+
+                switch (model) {
+                    case 'gpt':
+                        response = await callGPT(messages, {});
+                        break;
+                    case 'deepseek':
+                        response = await callDeepSeek(messages, {});
+                        break;
+                    case 'claude':
+                        response = await callClaude(messages, {});
+                        break;
+                    case 'ark':
+                        response = await callARK(messages, {});
+                        break;
+                    default:
+                        throw new Error('未选择的模型');
+                }
+
+                console.log('API 原始响应数据:', response);
+
+                if (response && response.choices && response.choices.length > 0) {
+                    return response.choices[0].message.content;
+                } else {
+                    console.error('API 响应格式异常，未能解析文本:', response);
+                    return null;
+                }
+            } catch (error) {
+                console.error('AI 调用失败:', error);
+                return null;
             }
         }
 
         downloadPostcard() {
-            // 实现下载功能
             const canvas = document.createElement('canvas');
             const ctx = canvas.getContext('2d');
             const img = document.getElementById('postcard-image');
             const text = document.getElementById('text-overlay');
 
+            if (!img) {
+                console.error('图片未找到，无法下载');
+                return;
+            }
+
             canvas.width = img.width;
             canvas.height = img.height;
-
-            // 绘制图片
             ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-            // 绘制文字
-            ctx.font = '24px "Ma Shan Zheng", cursive';
+            ctx.font = '24px Arial';
             ctx.fillStyle = '#3e2723';
             ctx.fillText(text.innerText, 20, canvas.height - 40);
 
-            // 生成下载链接
             const link = document.createElement('a');
             link.href = canvas.toDataURL('image/png');
             link.download = 'postcard.png';
@@ -109,20 +160,60 @@ if (!window.PostcardAgent) {
         }
     }
 
-    // 将类挂载到全局对象
     window.PostcardAgent = PostcardAgent;
 }
 
-// 切换加载状态
-function toggleHourglass(show) {
-    const loadingIndicator = document.getElementById('loading-indicator');
-
-    loadingIndicator.classList.toggle('status-visible', show);
-}
-
-// 初始化智能体
-document.addEventListener('DOMContentLoaded', () => {
-    if (document.querySelector('.postcard-agent')) {
-        new PostcardAgent();
+// 确保 PostcardAgent 只初始化一次
+document.addEventListener('DOMContentLoaded', function() {
+    if (!window.postcardAgent) {
+        console.log('初始化 PostcardAgent');
+        window.postcardAgent = new PostcardAgent();
     }
 });
+
+// 监听 tab 切换，确保 `postcard.html` 只加载一次
+const postcardButton = document.querySelector('.nav-btn[data-tab="postcard"]');
+if (postcardButton) {
+    postcardButton.addEventListener('click', async () => {
+        const targetTab = document.getElementById('postcard-tab');
+
+        if (!targetTab.dataset.loaded) {
+            console.log('加载 postcard.html');
+            try {
+                const response = await fetch(targetTab.dataset.agent);
+                targetTab.innerHTML = await response.text();
+
+                // 加载CSS（防止重复加载）
+                const cssPath = targetTab.dataset.agent.replace('.html', '.css');
+                if (!document.querySelector(`link[href="${cssPath}"]`)) {
+                    const link = document.createElement('link');
+                    link.rel = 'stylesheet';
+                    link.href = cssPath;
+                    document.head.appendChild(link);
+                }
+
+                // 加载JS（防止重复加载）
+                const jsPath = targetTab.dataset.agent.replace('.html', '.js');
+                if (!document.querySelector(`script[src="${jsPath}"]`)) {
+                    const script = document.createElement('script');
+                    script.src = jsPath;
+                    document.body.appendChild(script);
+                }
+
+                targetTab.dataset.loaded = true;
+            } catch (error) {
+                console.error('加载 postcard.html 失败:', error);
+            }
+        }
+
+        // **确保 PostcardAgent 只初始化一次**
+        if (!window.postcardAgent) {
+            setTimeout(() => {
+                console.log('初始化 PostcardAgent');
+                window.postcardAgent = new PostcardAgent();
+            }, 500);
+        }
+    });
+} else {
+    console.error('未找到 Postcard tab 按钮');
+}
