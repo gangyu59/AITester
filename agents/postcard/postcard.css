@@ -67,7 +67,7 @@
 
 .text-overlay {
     position: absolute;
-    top: 30%;
+    top: 20%;
     left: 50%;
     transform: translate(-50%, -50%); /* 居中 */
     max-width: 80%;
@@ -82,16 +82,28 @@
     white-space: pre-line; /* 让多行文本正常显示 */
 }
 
-.generate-btn,.download-btn, .generate-image-btn{
-    padding: 2px 5px;
-		width: 100px;
+.button-container {
+    display: flex;
+    justify-content: center; /* 让按钮在一行内居中 */
+    align-items: center;  /* 垂直居中 */
+    width: 100%; /* 让按钮区域占满整个页面 */
+    max-width: 100vw; /* 避免在小屏幕上溢出 */
+    padding: 0px 0; /* 增加上下留白 */
+}
+
+/* 让按钮大小合适，并排显示 */
+.generate-btn, .download-btn, .generate-image-btn {
+    padding: 5px 5px;
+    min-width: 100px;
     background: #28a745;
     color: white;
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 16px;
     transition: background 0.3s;
+    white-space: nowrap; /* 防止按钮内文字换行 */
+    margin: 0 10px; /* **保持按钮间距一致** */
 }
 
 .generate-btn, .download-btn, .generate-image-btn:hover {
@@ -114,7 +126,7 @@
     align-items: center;
     position: fixed;
     top: 70%;
-    left: 60%;
+    left: 50%;
     transform: translate(-50%, -50%);
     background: rgba(0, 0, 0, 0);
     padding: 20px;
@@ -125,10 +137,10 @@
 
 /* Hourglass 动画 */
 .hourglass {
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     border: 6px solid #3e2723;
-    border-radius: 50%;
+    border-radius: 100%;
     border-top-color: transparent;
     animation: spin 1s linear infinite;
 }

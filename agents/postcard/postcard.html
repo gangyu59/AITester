@@ -74,21 +74,24 @@
             </select>
         </div>
 
+		</div>
+		
         <!-- 生成按钮 -->
-        <button id="generate-btn" class="generate-btn">生成祝福语</button>
-				<button id="generate-image-btn" class="generate-image-btn">生成图片</button>
-		    <button id="download-btn" class="download-btn">下载</button>
+				<div class="button-container">
+				    <button id="generate-btn" class="generate-btn">书写祝福</button>
+				    <button id="generate-image-btn" class="generate-image-btn">生成图片</button>
+				    <button id="download-btn" class="download-btn">下载作品</button>
+				</div>
     </div>
 
     <!-- 输出区 -->
 		<div class="output-section">
 		    <div class="preview-area">
 		        <img id="postcard-image" class="postcard-template" src="assets/postcard-template.jpg" alt="  ">
-		        <div id="text-overlay" class="text-overlay" contenteditable="true">祝福语显示在这里</div>
+		        <div id="text-overlay" class="text-overlay" contenteditable="true">祝福语在这里</div>
 		        <div id="loading-indicator" class="loading-hidden">
 		            <div class="hourglass"></div>
-		            <span>AI 正在思考...</span>
+		            <span></span>
 		        </div>
 		    </div>
-		</div>
 </div>

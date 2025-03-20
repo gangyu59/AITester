@@ -54,7 +54,7 @@ if (!window.PostcardAgent) {
             if (generateImageBtn) {
                 generateImageBtn.addEventListener('click', () => {
                     console.log('🖼️ generate-image-btn 被点击');
-                    this.generateImage();
+                     generateImage();
                 });
             } else {
                 console.warn('⚠️ generate-image-btn 未找到');
@@ -84,9 +84,6 @@ if (!window.PostcardAgent) {
                 console.warn('⚠️ occasion 元素未找到');
             }
         }
-
-
-
         
     }
 
